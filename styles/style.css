@@ -1,0 +1,51 @@
+h1,h2{
+	text-align: center;
+}
+.resultsContent table{
+	width:800px;
+	text-align: left;
+	margin:10px;
+}
+
+#mainContent{
+	width:1200px;
+	margin:0 auto;
+}
+.formContent{
+	margin:50px auto;
+}
+.resultsContent{
+	margin:50px auto;
+	border-top:2px solid #000;
+}
+
+
+/* Style the buttons inside the tab */
+.tab button {
+	background-color: inherit;
+	float: left;
+	border: none;
+	outline: none;
+	cursor: pointer;
+	padding: 14px 16px;
+	transition: 0.3s;
+	font-size: 17px;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+	background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+	background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+	display: none;
+	padding: 100px 12px;
+	border: 1px solid #ccc;
+	border-top: none;
+}
