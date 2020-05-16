@@ -156,4 +156,14 @@
 		</cfquery>
 		<cfreturn getTaxInfo>
 	</cffunction>
+
+	<cffunction name="getInstallationInfoForCart" access="public" returntype="query">
+		<cfquery name="getInstallationInfo" datasource="#variables.dsn#">
+			select *
+			from merchantinstallations
+			where 
+				merchantid = <cfqueryparam cfsqltype="cf_sql_integer" value="#variables.retailerID#">	
+		</cfquery>
+		<cfreturn getInstallationInfo>
+	</cffunction>
 </cfcomponent>
