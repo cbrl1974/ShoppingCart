@@ -23,3 +23,28 @@
         </cfoutput>
     </tbody>				
 </table>
+<cfif isQuery(getInstallationwithZones) and getInstallationwithZones.recordcount GT 0>
+    <table class="tableresults">
+        <h2>Installation with Zones</h2>					
+        <thead>
+            <tr>						
+                <th>ID</th>
+                <th>ZoneID</th>
+                <th>code</th>
+                <th>cost</th>
+            </tr>
+        </thead>
+        <tbody>
+            <cfoutput query="getInstallationwithZones">
+            <tr>						
+                <td>#ID#</td>
+                <td>#MerchantZoneID#</td>
+                <td>#code#</td>
+                <td>#cost#</td>
+            </tr>
+            </cfoutput>
+        </tbody>				
+    </table>
+<cfelse>
+    <h2>No Records found for Istallations zones</h2>
+</cfif>

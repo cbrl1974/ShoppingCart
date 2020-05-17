@@ -166,4 +166,24 @@
 		</cfquery>
 		<cfreturn getInstallationInfo>
 	</cffunction>
+
+	<cffunction name="getInstallationwithZonesInfoForCart" access="public" returntype="any">
+		<cfset installationID = 0>
+		<cfset getInstallationwithZones ="">
+		<cfset getInstallation= getInstallationInfoForCart()>
+		<cfif getInstallation.recordcount GT 0>
+			<cfset installationID = getInstallation.id>
+			<cfquery name="getInstallationwithZones" datasource="#variables.dsn#">
+				select ID,
+					MerchantInstallationID,
+					MerchantZoneID,
+					code,
+					cost
+				from merchantinstallationzones
+				where 
+					merchantinstallationID = <cfqueryparam cfsqltype="cf_sql_integer" value="#installationID#">	
+			</cfquery>
+		</cfif>
+		<cfreturn getInstallationwithZones>
+	</cffunction>
 </cfcomponent>

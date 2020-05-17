@@ -9,5 +9,8 @@
 <cfset getShippingByLocRings =shoppingCartCfcObject.getShippingByLocRings()>
 <cfset getShippingByRadio =shoppingCartCfcObject.getShippingByRadio()>	
 <cfset getInstallationInfo =shoppingCartCfcObject.getInstallationInfoForCart()>
+<cfset getInstallationwithZones =shoppingCartCfcObject.getInstallationwithZonesInfoForCart()>
+
+
 
 
