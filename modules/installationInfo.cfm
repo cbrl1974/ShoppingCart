@@ -1,7 +1,7 @@
 <table class="tableresults">
-    <h2>Installation</h2>					
+    <h2>Installation</h2>
     <thead>
-        <tr>						
+        <tr>
             <th>ID</th>
             <th>description EN</th>
             <th>description FR</th>
@@ -13,7 +13,7 @@
         <cfoutput query="getInstallationInfo">
             <cfset default = selectedByDefault eq 1? "Yes":"No">
             <cfset mandatory = required eq 1? "Yes":"No">
-        <tr>						
+        <tr>
             <td>#id#</td>
             <td>#description_1#</td>
             <td>#description_2#</td>
@@ -21,29 +21,37 @@
             <td>#default#</td>
         </tr>
         </cfoutput>
-    </tbody>				
+    </tbody>
 </table>
+
+<cfset column_names= getInstallationwithZones.getColumnNames()>
 <cfif isQuery(getInstallationwithZones) and getInstallationwithZones.recordcount GT 0>
-    <table class="tableresults">
-        <h2>Installation with Zones</h2>					
+    <table>
         <thead>
-            <tr>						
-                <th>ID</th>
-                <th>ZoneID</th>
-                <th>code</th>
-                <th>cost</th>
+            <tr>
+            <cfoutput>
+                <cfloop array="#column_names#" index="column">
+                <th>#column#</th>
+                </cfloop>
+            </cfoutput>
             </tr>
         </thead>
         <tbody>
             <cfoutput query="getInstallationwithZones">
-            <tr>						
+                <cfset thisCode = code eq ""? "Null": code>
+            <tr>
                 <td>#ID#</td>
+                <td>#merchantinstallationid#</td>
                 <td>#MerchantZoneID#</td>
-                <td>#code#</td>
-                <td>#cost#</td>
+                <td>#name_1#</td>
+                <td>#countryCode#</td>
+                <td>#stateCode#</td>
+                <td>#postalcode#</td>
+                <td>#thisCode#</td>
+                <td>#numberFormat(cost, "$___,__")#</td>
             </tr>
             </cfoutput>
-        </tbody>				
+        </tbody>
     </table>
 <cfelse>
     <h2>No Records found for Istallations zones</h2>
