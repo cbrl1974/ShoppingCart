@@ -1,4 +1,4 @@
-<cfset shoppingCartCfcObject = createObject("component","shoppingCart")>
+<cfset shoppingCartCfcObject = createObject("component","shoppingCart")/>
 
 <cfset getRetailerInfo =shoppingCartCfcObject.getRetailerInfoForCart()>
 <cfset getTaxInfo =shoppingCartCfcObject.getRetailertaxesForCart()>
@@ -11,4 +11,6 @@
 <cfset getInstallationInfo =shoppingCartCfcObject.getInstallationInfoForCart()>
 <cfset getInstallationwithZones =shoppingCartCfcObject.getInstallationwithZonesInfoForCart()>
 <cfset getInstallationPrices =shoppingCartCfcObject.getInstallationPicesInfoForCart()>
+
+ <!--- value="#variables.instance.retailerID#" --->
 

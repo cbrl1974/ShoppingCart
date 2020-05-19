@@ -1,12 +1,14 @@
-
+<cfset thisShippingOption = valueList(getRetailerInfo.ShippingOption)/>
+<cfset titleList = 'Merchant ID,Merchant,Shipping Option,Payment Gateway'/>
 <table class="tableresults">
-    <h2>Main Info</h2>					
+    <h2>Main Info</h2>
     <thead>
         <tr>
-            <th>Merchant ID</th>
-            <th>Merchant</th>
-            <th>Shipping Option</th>
-            <th>Payment Gateway</th>
+            <cfoutput>
+            <cfloop list="#titleList#" index="thisTitle">
+                <th>#ucase(thisTitle)#</th>
+            </cfloop>
+            </cfoutput>
         </tr>
     </thead>
     <tbody>
@@ -14,9 +16,13 @@
         <tr>
             <td>#id#</td>
             <td>#merchant#</td>
-            <td>#ShippingOption#</td>
+            <td>
+                <cfloop list="#thisShippingOption#" index="thisOption">
+                    #thisOption# <br>
+                </cfloop>
+            </td>
             <td>#Paymenttype#</td>
         </tr>
         </cfoutput>
-    </tbody>				
+    </tbody>
 </table>
