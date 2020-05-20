@@ -124,6 +124,7 @@
 
 	<cffunction name="getShippingByRadio" access="public" returntype="any">
 		<cfset shippingOptionType = getRetailerInfoForCart()/>
+		<cfset data = 0/>
 
 		<cfif structKeyExists(shippingOptionType,"shippingOption") and listFindNocase(shippingOptionType.shippingOption,"merchantShippingByStoreLocationRadio") and variables.instance.thisShippingID neq "">
 			<cfquery name="data" datasource="#variables.instance.dsn#">

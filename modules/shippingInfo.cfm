@@ -1,19 +1,19 @@
 <table>
-    <h2>Shipping Info</h2>					
+    <h2>Shipping Info</h2>
         <thead>
-            <tr>						
+            <tr>
                 <th>Shipping ID</th>
                 <th>Shipping name</th>
             </tr>
         </thead>
         <tbody>
             <cfoutput query="getShippingInfo">
-            <tr>						
+            <tr>
                 <td>#shippingID#</td>
                 <td>#name_1#</td>
             </tr>
             </cfoutput>
-        </tbody>				
+        </tbody>
     </table>
 
     <cfoutput>
@@ -46,11 +46,11 @@
                 </tbody>				
             </table>
         </cfif>
-        <cfif isQuery(getShippingByValueRanges) and getShippingByValueRanges.recordcount neq 0>					
+        <cfif isQuery(getShippingByValueRanges) and getShippingByValueRanges.recordcount neq 0>
             <table>
-                <h2>Shipping Info By value range</h2>					
+                <h2>Shipping Info By value range</h2>
                 <thead>
-                    <tr>						
+                    <tr>
                         <th>ID</th>
                         <th>Shipping ID</th>
                         <th>Low Price</th>
@@ -62,7 +62,7 @@
                 </thead>
                 <tbody>
                     <cfloop query="getShippingByValueRanges">
-                    <tr>						
+                    <tr>
                         <td>#id#</td>
                         <td>#merchantShippingID#</td>
                         <td>#lowPrice#</td>
@@ -72,14 +72,14 @@
                         <td>#numberFormat(percentcost,"$_.__")#</td>
                     </tr>
                 </cfloop>
-                </tbody>				
+                </tbody>
             </table>
-        </cfif>		
+        </cfif>
         <cfif isQuery(getShippingByShippingPrices) and  getShippingByShippingPrices.recordcount neq 0>
             <table>
-                <h2>Shipping Info By price</h2>					
+                <h2>Shipping Info By price</h2>
                 <thead>
-                    <tr>						
+                    <tr>
                         <th>ID</th>
                         <th>cat ID</th>
                         <th>Collection ID</th>
@@ -97,8 +97,8 @@
                     <cfloop query="getShippingByShippingPrices">
                     <tr>
                         <td>#id#</td>
-                        <td>#catId#</td>						
-                        <td>#Brandid#</td>									
+                        <td>#catId#</td>
+                        <td>#Brandid#</td>
                         <td>#collectionId#</td>
                         <td>#lowPrice#</td>
                         <td>#highPrice#</td>
@@ -110,12 +110,12 @@
                         <td>#subCatId#</td>
                     </tr>
                 </cfloop>
-                </tbody>				
+                </tbody>
             </table>
-        </cfif>		
-        <cfif isQuery(getShippingByRadio) and getShippingByRadio.recordcount neq 0>					
+        </cfif>
+        <cfif isQuery(getShippingByRadio) and getShippingByRadio.recordcount neq 0>
             <table>
-                <h2>Shipping Info By radio single</h2>					
+                <h2>Shipping Info By radio single</h2>
                 <thead>
                     <tr>
                         <th>Shipping ID</th>
@@ -133,12 +133,12 @@
                         <td>#numberFormat(price,"$_.__")#</td>
                     </tr>
                 </cfloop>
-                </tbody>				
+                </tbody>
             </table>
         </cfif>
-        <cfif isQuery(getShippingByLocRings) and getShippingByLocRings.recordcount neq 0>					
+        <cfif isQuery(getShippingByLocRings) and getShippingByLocRings.recordcount neq 0>
             <table>
-                <h2>Shipping Info By radiuses</h2>					
+                <h2>Shipping Info By radiuses</h2>
                 <thead>
                     <tr>
                         <th>Shipping ID</th>
@@ -160,7 +160,7 @@
                         <td>#numberFormat(pricePerKM,"$_.__")#</td>
                     </tr>
                 </cfloop>
-                </tbody>				
+                </tbody>
             </table>
         </cfif>
-    </cfoutput>	
+    </cfoutput>

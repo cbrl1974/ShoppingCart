@@ -12,5 +12,3 @@
 <cfset getInstallationwithZones =shoppingCartCfcObject.getInstallationwithZonesInfoForCart()>
 <cfset getInstallationPrices =shoppingCartCfcObject.getInstallationPicesInfoForCart()>
 
- <!--- value="#variables.instance.retailerID#" --->
-
