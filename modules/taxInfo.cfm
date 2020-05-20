@@ -1,7 +1,7 @@
 <table class="tableresults">
-    <h2>Tax Info</h2>					
+    <h2>Tax Info</h2>
     <thead>
-        <tr>						
+        <tr>
             <th>Tax ID</th>
             <th>Tax Name</th>
             <th>Tax Amount</th>
@@ -13,7 +13,7 @@
     </thead>
     <tbody>
         <cfoutput query="getTaxInfo">
-        <tr>						
+        <tr>
             <td>#taxID#</td>
             <td>#name_1#</td>
             <td>#amount#</td>
@@ -23,5 +23,5 @@
             <td>#postalCode#</td>
         </tr>
         </cfoutput>
-    </tbody>				
+    </tbody>
 </table>

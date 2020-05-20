@@ -3,13 +3,16 @@
 	<cfset variables.instance ={
 		dsn = '',
 		thisShippingID = '',
-		retailerID=''
+		retailerID='',
+		thisInstallationID =''
 	}/>
 
 	<cfset variables.instance.dsn = "datatail"/>
 	<cfset variables.instance.retailerID = structKeyExists(form,"retailerID") and form.retailerID neq ""?form.retailerID: 0>
 	<cfset getShippingInfo = getRetailerShippingForCart()/>
+	<cfset getInstallationInfo = getInstallationInfoForCart()>
 	<cfset variables.instance.thisShippingID  = valueList(getShippingInfo.shippingID)/>
+	<cfset variables.instance.thisInstallationID  = valueList(getInstallationInfo.id)/>
 
 
 
@@ -178,12 +181,9 @@
 	</cffunction>
 
 	<cffunction name="getInstallationwithZonesInfoForCart" access="public" returntype="any">
-		<cfset installationID = 0>
-		<cfset getInstallationwithZones ="">
-		<cfset getInstallation= getInstallationInfoForCart()>
-		<cfif getInstallation.recordcount GT 0>
-			<cfset installationID = getInstallation.id>
-			<cfquery name="getInstallationwithZones" datasource="#variables.instance.dsn#">
+		<cfset data ="">
+		<cfif len(variables.instance.thisInstallationID) GTE 2>
+			<cfquery name="data" datasource="#variables.instance.dsn#">
 				select miz.ID,
 				miz.MerchantInstallationID,
 				miz.MerchantZoneID,
@@ -197,45 +197,60 @@
 				join merchantzones mz on mz.id = miz.MerchantZoneID
 				join merchantzonecodes mzc on mzc.merchantzoneid = miz.merchantZoneid
 				where
-				miz.merchantinstallationID = <cfqueryparam cfsqltype="cf_sql_integer" value="#installationID#">
+				miz.merchantinstallationID in (<cfqueryparam cfsqltype="cf_sql_integer" list="true" separator="," value="#variables.instance.thisInstallationID#">)
 			</cfquery>
 		</cfif>
-		<cfreturn getInstallationwithZones>
+		<cfreturn data>
 	</cffunction>
 
 	<cffunction name="getInstallationPicesInfoForCart" access="public" returntype="any">
-		<cfset installationID = 0>
-		<cfset getInstallationPrices ="">
-		<cfset getInstallation= getInstallationInfoForCart()>
-		<cfif getInstallation.recordcount GT 0>
-			<cfset installationID = getInstallation.id>
-			<cfquery name="getInstallationPrices" datasource="#variables.instance.dsn#">
+		<cfset data ="">
+		<cfif len(variables.instance.thisInstallationID) GTE 2>
+			<cfquery name="data" datasource="#variables.instance.dsn#">
 				select ID,
 				MerchantInstallationID,
 				code,
 				cost
 				from merchantinstallationprices
 				where
-				merchantinstallationID = <cfqueryparam cfsqltype="cf_sql_integer" value="#installationID#">
+				merchantinstallationID in (<cfqueryparam cfsqltype="cf_sql_integer" list="true" separator="," value="#variables.instance.thisInstallationID#">)
 			</cfquery>
 		</cfif>
-		<cfreturn getInstallationPrices>
+		<cfreturn data>
 	</cffunction>
 
 	<cffunction name="getInstallationFiltersInfoForCart" access="public" returntype="any">
-		<cfset installationID = 0>
-		<cfset getInstallationFilters ="">
-		<cfset getInstallation= getInstallationInfoForCart()>
-		<cfif getInstallation.recordcount GT 0>
-			<cfset installationID = getInstallation.id>
-			<cfquery name="getInstallationFilters" datasource="#variables.instance.dsn#">
-				select *
-				from merchantinstallationfilters
-				where
-				merchantinstallationID = <cfqueryparam cfsqltype="cf_sql_integer" value="#installationID#">
+		<cfset data ="">
+		<cfif len(variables.instance.thisInstallationID) GTE 2>
+			<cfquery name="data" datasource="#variables.instance.dsn#">
+				SELECT
+					mif.merchantInstallationID,
+					p.id_product,
+					p.model,
+					co.id_cie,
+					co.cie,
+					c.id_category,
+					c.category,
+					s.id_subcategory,
+					s.subcategory,
+					col.id,
+					col.collection_1
+				FROM
+					merchantinstallationfilters mif
+					JOIN categories c ON c.id_category = mif.catid
+						AND c.id_langue = 1
+					LEFT JOIN products p ON p.id_product = mif.productid
+					LEFT JOIN companies co ON co.id_cie = mif.brandID
+					LEFT JOIN subcategories s ON s.id_subcategory = mif.subcatID
+						AND s.id_langue = 1
+					LEFT JOIN collections col ON col.id = mif.collectionID
+				WHERE
+					mif.merchantinstallationID in(<cfqueryparam cfsqltype="cf_sql_integer" list="true" separator="," value="#variables.instance.thisInstallationID#">)
 			</cfquery>
 		</cfif>
-		<cfreturn getInstallationFilters>
+		<cfreturn data>
 	</cffunction>
+
+
 
 </cfcomponent>

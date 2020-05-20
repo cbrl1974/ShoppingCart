@@ -64,7 +64,6 @@
         <h2>No Records found for Istallations zones</h2>
     </cfif>
 
-
     <cfif isQuery(getInstallationPrices) and getInstallationPrices.recordcount GT 0>
         <cfset column_names= getInstallationPrices.getColumnNames()>
         <table>
@@ -89,6 +88,41 @@
                     <td>#numberFormat(cost, "$___,__")#</td>
                 </tr>
                 </cfoutput>
+            </tbody>
+        </table>
+    <cfelse>
+        <h2>No Records found for Installations Prices</h2>
+    </cfif>
+
+    <cfif isQuery(getInstallationFilters) and getInstallationFilters.recordcount GT 0>
+        <cfset column_names= getInstallationFilters.getColumnNames()>
+        <table>
+            <h2>Installation filters no zones</h2>
+            <thead>
+                <tr>
+                <cfoutput>
+                    <cfloop array="#column_names#" index="column">
+                    <th>#column#</th>
+                    </cfloop>
+                </cfoutput>
+                </tr>
+            </thead>
+            <tbody>
+            <cfoutput query="getInstallationFilters">
+                    <tr>
+                        <td>#merchantInstallationID#</td>
+                        <td>#id_product#</td>
+                        <td>#model#</td>
+                        <td>#id_cie#</td>
+                        <td>#cie#</td>
+                        <td>#id_category#</td>
+                        <td>#category#</td>
+                        <td>#id_subcategory#</td>
+                        <td>#subcategory#</td>
+                        <td>#id#</td>
+                        <td>#collection_1#</td>
+                    </tr>
+            </cfoutput>
             </tbody>
         </table>
     <cfelse>

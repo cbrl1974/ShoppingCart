@@ -11,4 +11,5 @@
 <cfset getInstallationInfo =shoppingCartCfcObject.getInstallationInfoForCart()>
 <cfset getInstallationwithZones =shoppingCartCfcObject.getInstallationwithZonesInfoForCart()>
 <cfset getInstallationPrices =shoppingCartCfcObject.getInstallationPicesInfoForCart()>
+<cfset getInstallationFilters =shoppingCartCfcObject.getInstallationFiltersInfoForCart()>
 
