@@ -1,3 +1,6 @@
+<cfsilent>
+	<cfset activeDefault = false/>
+</cfsilent>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -38,20 +41,6 @@
 	<cfinclude template="modules/cfcDefinition.cfm"></cfinclude>
 
 	<div class="container-contact100">
-		<cfset activeDefault = false/>
-		<cfif structKeyExists(form, "setRetailer")>
-			<div>
-				<span class="contact100-form-title">
-				<cfif getRetailerInfo.recordcount eq 0>
-					No info for cart available at this moment
-				<cfelse>
-					<cfset activeDefault = true/>
-					Cart info for:<br>
-					 <cfoutput>#getRetailerInfo.merchant#(#getRetailerInfo.id#)</cfoutput>
-				</cfif>
-			</span>
-			</div>
-		</cfif>
 		<div class="wrap-contact100">
 			<form action="index.cfm" method="post" class="contact100-form validate-form">
 				<span class="contact100-form-title">
@@ -132,6 +121,19 @@
 				</div>
 			</form>
 			<br><br>
+			<cfif structKeyExists(form, "setRetailer")>
+				<div class="wrap-contact100">
+					<span class="contact100-form-title">
+						<cfif getRetailerInfo.recordcount eq 0>
+							No info for cart available at this moment
+						<cfelse>
+							<cfset activeDefault = true/>
+							Cart info for:<br>
+							<cfoutput>#getRetailerInfo.merchant#(#getRetailerInfo.id#)</cfoutput>
+						</cfif>
+					</span>
+				</div>
+			</cfif><br><br>
 			<div class="tab">
 				<button class="tablinks <cfif activeDefault>active</cfif>" onclick="openCity(event, 'Features')">Features</button>
 				<button class="tablinks" onclick="openCity(event, 'Shipping')">Shipping</button>
