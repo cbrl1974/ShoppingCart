@@ -123,7 +123,7 @@
 			<br><br>
 			<cfif structKeyExists(form, "setRetailer")>
 				<div class="wrap-contact100">
-					<span class="contact100-form-title">
+					<span class="contact100-form-title adjusted">
 						<cfif getRetailerInfo.recordcount eq 0>
 							No info for cart available at this moment
 						<cfelse>
@@ -142,7 +142,7 @@
 			</div>
 			<cfif isDefined('form.setRetailer')>
 				<div class="resultsContent">
-					<div id="Features" class="tabcontent">
+					<div id="Features" class="tabcontent"<cfif activeDefault>style="display:inline-block"</cfif>">
 						<cfinclude template="modules/mainInfo.cfm">
 					</div>
 					<div id="Shipping" class="tabcontent">

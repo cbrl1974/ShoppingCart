@@ -214,6 +214,9 @@ iframe {
   padding-bottom: 59px;
 }
 
+.contact100-form-title.adjusted{
+  padding: 0 55px;
+}
 
 
 /*------------------------------------------------------------------
@@ -272,7 +275,6 @@ textarea.input100 {
 .has-val.input100 + .focus-input100::before {
   width: 100%;
 }
-
 
 /*------------------------------------------------------------------
 [ Button ]*/
