@@ -251,6 +251,78 @@
 		<cfreturn data>
 	</cffunction>
 
+	<cffunction name="getInfoTextsForCart" access="public" returntype="any">
+		<cfset data ="">
+			<cfquery name="data" datasource="#variables.instance.dsn#">
+				SELECT
+					ID
+					,textcode
+					,content_1
+					,content_2
+				FROM
+					merchantwebsitetexts
+				WHERE
+					textcode like <cfqueryparam cfsqltype="cf_sql_varchar"  value="%payment%">
+				and
+				merchant_id = <cfqueryparam cfsqltype="cf_sql_integer" value="#variables.instance.retailerID#">
+			</cfquery>
+		<cfreturn data>
+	</cffunction>
+
+	<!--- <cffunction name="getPaymentConnectionData" access="public" output="false" returntype="struct">
+        <cfargument name="merchant" type="any" required="true">
+        <cfargument name="languageCode" type="string" required="true">
+
+        <cfif structKeyExists(REQUEST, "PaymentConnectionData") and isStruct(REQUEST.PaymentConnectionData)>
+            <cfreturn REQUEST.PaymentConnectionData>
+        </cfif>
+
+        <cfset var lcode = arguments.languageCode>
+        <cfif lcode eq "">
+            <cfset lcode = "en">
+        </cfif>
+
+        <!--- get the texts from the merchant --->
+        <cfset var textsData = arguments.merchant.getTexts()>
+
+        <cfset var testingMode = structKeyExists(URL, 'workingMode') and URL.workingMode eq 'testing'>
+
+        <cfset var textCode = (testingMode ? 'paymentDetailTest' : 'paymentDetail')>
+
+        <cfset var connectionString = "">
+        <cfif structKeyExists(textsData[lcode], textCode)>
+            <!--- the content exists in the current language --->
+            <cfset connectionString = textsData[lcode][textCode]>
+        <cfelseif structKeyExists(textsData["en"], textCode)>
+            <!--- the content exists in "en" (this is `content_1`) --->
+            <cfset connectionString = textsData["en"][textCode]>
+        </cfif>
+
+        <cfif connectionString eq "">
+            <!--- return an empty struct since we don't have data to work with --->
+            <cfreturn structNew()>
+        </cfif>
+
+        <cfset var connectionInfo = structNew()>
+        <cfset var paymentdetailpart = "">
+
+        <cfif listLen(connectionString, "|") gt 1>
+            <cfset connectionInfo.paymenttype = listFirst(connectionString, "|")>
+            <cfset connectionString = listRest(connectionString, "|")>
+            <cfloop list="#connectionString#" index="paymentdetailpart" delimiters="|">
+                <cfif listLen(paymentdetailpart, "~") gte 2>
+                    <cfset connectionInfo[listFirst(paymentdetailpart, "~")] = listRest(paymentdetailpart, "~")>
+                </cfif>
+            </cfloop>
+        </cfif>
+
+        <cfset connectionInfo.testingMode = testingMode>
+
+        <!--- persist data during current request --->
+        <cfset REQUEST.PaymentConnectionData = connectionInfo>
+
+        <cfreturn connectionInfo>
+    </cffunction> --->
 
 
 </cfcomponent>

@@ -139,10 +139,11 @@
 				<button class="tablinks" onclick="openCity(event, 'Shipping')">Shipping</button>
 				<button class="tablinks" onclick="openCity(event, 'Tax')">Tax</button>
 				<button class="tablinks" onclick="openCity(event, 'Installation')">Installation</button>
+				<button class="tablinks" onclick="openCity(event, 'texts')">Texts</button>
 			</div>
 			<cfif isDefined('form.setRetailer')>
 				<div class="resultsContent">
-					<div id="Features" class="tabcontent"<cfif activeDefault>style="display:inline-block"</cfif>">
+					<div id="Features" class="tabcontent"<cfif activeDefault>style="display:inline-block"</cfif>>
 						<cfinclude template="modules/mainInfo.cfm">
 					</div>
 					<div id="Shipping" class="tabcontent">
@@ -153,6 +154,9 @@
 					</div>
 					<div id="Installation" class="tabcontent">
 						<cfinclude template="modules/installationInfo.cfm">
+					</div>
+					<div id="texts" class="tabcontent">
+						<cfinclude template="modules/cartInfotexts.cfm">
 					</div>
 			</cfif>
 		</div>
